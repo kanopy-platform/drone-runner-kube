@@ -222,13 +222,18 @@ func (c *execCommand) run(*kingpin.ParseContext) error {
 		if step.RunPolicy == runtime.RunNever {
 			continue
 		}
-		c.Stage.Steps = append(c.Stage.Steps, &drone.Step{
+
+		droneStep := &drone.Step{
 			StageID:   c.Stage.ID,
 			Number:    len(c.Stage.Steps) + 1,
 			Name:      step.Name,
 			Status:    drone.StatusPending,
 			ErrIgnore: step.ErrPolicy == runtime.ErrIgnore,
-		})
+		}
+
+		c.Stage.Steps = append(c.Stage.Steps, droneStep)
+
+		step.Envs = environ.Combine(step.Envs, environ.Step(droneStep))
 	}
 
 	// configures the pipeline timeout.
