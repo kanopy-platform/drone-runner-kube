@@ -23,6 +23,7 @@ import (
 	"github.com/drone/runner-go/pipeline/runtime"
 	"github.com/drone/runner-go/registry"
 	"github.com/drone/runner-go/secret"
+	"github.com/sirupsen/logrus"
 
 	"gopkg.in/alecthomas/kingpin.v2"
 )
@@ -46,6 +47,7 @@ type compileCommand struct {
 }
 
 func (c *compileCommand) run(*kingpin.ParseContext) error {
+	logrus.Infof("yuzhou debug in compileCommand.run\n")
 	// resource memory amounts are provided in megabytes, so convert them to bytes.
 	c.Resource.Limits.Memory *= 1024 * 1024
 	c.Resource.MinRequests.Memory *= 1024 * 1024

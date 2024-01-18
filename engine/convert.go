@@ -232,7 +232,7 @@ func toEnv(spec *Spec, step *Step) []v1.EnvVar {
 			Value: v,
 		})
 	}
-	logrus.Errorf("yuzhou debug toEnv envVars: %+v\n", envVars)
+	logrus.Infof("yuzhou debug toEnv envVars: %+v\n", envVars)
 
 	for _, secret := range step.Secrets {
 		envVars = append(envVars, v1.EnvVar{

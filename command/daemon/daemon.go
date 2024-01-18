@@ -45,6 +45,8 @@ type daemonCommand struct {
 }
 
 func (c *daemonCommand) run(*kingpin.ParseContext) error {
+	logrus.Infof("yuzhou debug in daemonCommand.run\n")
+
 	// load environment variables from file.
 	godotenv.Load(c.envfile)
 

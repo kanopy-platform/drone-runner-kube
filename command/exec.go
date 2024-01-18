@@ -79,7 +79,7 @@ type execCommand struct {
 }
 
 func (c *execCommand) run(*kingpin.ParseContext) error {
-	logrus.Errorf("yuzhou debug in run\n")
+	logrus.Infof("yuzhou debug in execCommand.run\n")
 
 	// resource memory amounts are provided in megabytes, so convert them to bytes.
 	c.Resource.Limits.Memory *= 1024 * 1024
@@ -236,14 +236,10 @@ func (c *execCommand) run(*kingpin.ParseContext) error {
 		c.Stage.Steps = append(c.Stage.Steps, droneStep)
 		step.Envs = environ.Combine(step.Envs, environ.Step(droneStep))
 
-		println("yuzhou debug: drone.Step Name: %v, Number: %v\n", droneStep.Name, droneStep.Number)
-		println("yuzhou debug: step.Envs: %v\n", step.Envs)
-
 		logrus.Errorf("yuzhou debug: drone.Step Name: %v, Number: %v\n", droneStep.Name, droneStep.Number)
 		logrus.Errorf("yuzhou debug: step.Envs: %v\n", step.Envs)
 	}
 
-	println("yuzhou debug sanity")
 	logrus.Errorf("yuzhou debug sanity")
 
 	// configures the pipeline timeout.
@@ -324,8 +320,6 @@ func dump(v interface{}) {
 }
 
 func registerExec(app *kingpin.Application) {
-	logrus.Errorln("yuzhou debug registerExec")
-
 	c := new(execCommand)
 	c.Environ = map[string]string{}
 	c.Secrets = map[string]string{}

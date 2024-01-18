@@ -13,6 +13,7 @@ import (
 
 	"github.com/drone-runners/drone-runner-kube/engine/launcher"
 	"github.com/drone-runners/drone-runner-kube/engine/podwatcher"
+	"github.com/sirupsen/logrus"
 
 	"github.com/drone/runner-go/logger"
 	"github.com/drone/runner-go/pipeline/runtime"
@@ -51,6 +52,8 @@ func New(client kubernetes.Interface, containerStartTimeout time.Duration) runti
 
 // Setup the pipeline environment.
 func (k *Kubernetes) Setup(ctx context.Context, specv runtime.Spec) (err error) {
+	logrus.Infof("yuzhou debug in Setup\n")
+
 	spec := specv.(*Spec)
 
 	log := logger.FromContext(ctx).
