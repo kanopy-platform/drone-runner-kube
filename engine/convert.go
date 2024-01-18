@@ -7,6 +7,7 @@ package engine
 import (
 	"strings"
 
+	"github.com/sirupsen/logrus"
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -231,6 +232,7 @@ func toEnv(spec *Spec, step *Step) []v1.EnvVar {
 			Value: v,
 		})
 	}
+	logrus.Errorf("yuzhou debug toEnv envVars: %+v\n", envVars)
 
 	for _, secret := range step.Secrets {
 		envVars = append(envVars, v1.EnvVar{

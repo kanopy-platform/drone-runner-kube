@@ -79,6 +79,8 @@ type execCommand struct {
 }
 
 func (c *execCommand) run(*kingpin.ParseContext) error {
+	logrus.Errorf("yuzhou debug in run\n")
+
 	// resource memory amounts are provided in megabytes, so convert them to bytes.
 	c.Resource.Limits.Memory *= 1024 * 1024
 	c.Resource.MinRequests.Memory *= 1024 * 1024
@@ -242,7 +244,7 @@ func (c *execCommand) run(*kingpin.ParseContext) error {
 	}
 
 	println("yuzhou debug sanity")
-	logrus.Errorln("yuzhou debug sanity")
+	logrus.Errorf("yuzhou debug sanity")
 
 	// configures the pipeline timeout.
 	timeout := time.Duration(c.Repo.Timeout) * time.Minute
@@ -322,7 +324,6 @@ func dump(v interface{}) {
 }
 
 func registerExec(app *kingpin.Application) {
-	println("yuzhou debug registerExec")
 	logrus.Errorln("yuzhou debug registerExec")
 
 	c := new(execCommand)
