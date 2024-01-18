@@ -234,9 +234,11 @@ func (c *execCommand) run(*kingpin.ParseContext) error {
 		c.Stage.Steps = append(c.Stage.Steps, droneStep)
 		step.Envs = environ.Combine(step.Envs, environ.Step(droneStep))
 
-		fmt.Printf("YUZHOU DEBUG: drone.Step Name: %v, Number: %v\n", droneStep.Name, droneStep.Number)
-		fmt.Printf("YUZHOU DEBUG: step.Envs: %v\n", step.Envs)
+		println("YUZHOU DEBUG: drone.Step Name: %v, Number: %v\n", droneStep.Name, droneStep.Number)
+		println("YUZHOU DEBUG: step.Envs: %v\n", step.Envs)
 	}
+
+	println("YUZHOU DEBUG sanity")
 
 	// configures the pipeline timeout.
 	timeout := time.Duration(c.Repo.Timeout) * time.Minute
