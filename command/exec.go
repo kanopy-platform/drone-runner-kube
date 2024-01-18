@@ -234,11 +234,15 @@ func (c *execCommand) run(*kingpin.ParseContext) error {
 		c.Stage.Steps = append(c.Stage.Steps, droneStep)
 		step.Envs = environ.Combine(step.Envs, environ.Step(droneStep))
 
-		println("YUZHOU DEBUG: drone.Step Name: %v, Number: %v\n", droneStep.Name, droneStep.Number)
-		println("YUZHOU DEBUG: step.Envs: %v\n", step.Envs)
+		println("yuzhou debug: drone.Step Name: %v, Number: %v\n", droneStep.Name, droneStep.Number)
+		println("yuzhou debug: step.Envs: %v\n", step.Envs)
+
+		logrus.Errorf("yuzhou debug: drone.Step Name: %v, Number: %v\n", droneStep.Name, droneStep.Number)
+		logrus.Errorf("yuzhou debug: step.Envs: %v\n", step.Envs)
 	}
 
-	println("YUZHOU DEBUG sanity")
+	println("yuzhou debug sanity")
+	logrus.Errorln("yuzhou debug sanity")
 
 	// configures the pipeline timeout.
 	timeout := time.Duration(c.Repo.Timeout) * time.Minute
@@ -248,7 +252,7 @@ func (c *execCommand) run(*kingpin.ParseContext) error {
 	// listen for operating system signals and cancel execution
 	// when received.
 	ctx = signal.WithContextFunc(ctx, func() {
-		println("received signal, terminating process")
+		println("received signal, terminating process, yuzhou debug exec")
 		cancel()
 	})
 
@@ -318,6 +322,9 @@ func dump(v interface{}) {
 }
 
 func registerExec(app *kingpin.Application) {
+	println("yuzhou debug registerExec")
+	logrus.Errorln("yuzhou debug registerExec")
+
 	c := new(execCommand)
 	c.Environ = map[string]string{}
 	c.Secrets = map[string]string{}

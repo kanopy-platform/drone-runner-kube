@@ -63,7 +63,7 @@ func (c *daemonCommand) run(*kingpin.ParseContext) error {
 	// listen for termination signals to gracefully shutdown
 	// the runner daemon.
 	ctx = signal.WithContextFunc(ctx, func() {
-		println("received signal, terminating process")
+		println("received signal, terminating process, yuzhou debug daemon")
 		cancel()
 	})
 
