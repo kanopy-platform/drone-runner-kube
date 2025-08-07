@@ -51,11 +51,11 @@ func TestClone(t *testing.T) {
 			RunPolicy:   runtime.RunAlways,
 			WorkingDir:  "/drone/src",
 			Volumes: []*engine.VolumeMount{
-				&engine.VolumeMount{
+				{
 					Name: "_workspace",
 					Path: "/drone/src",
 				},
-				&engine.VolumeMount{
+				{
 					Name: "_status",
 					Path: "/run/drone",
 				},
@@ -140,7 +140,7 @@ func TestCloneParams(t *testing.T) {
 	if len(params) != 0 {
 		t.Errorf("Expect zero depth ignored")
 	}
-	params = cloneParams(manifest.Clone{Depth: 50, SkipVerify: true})
+	params = cloneParams(manifest.Clone{Depth: 50, SkipVerify: true, Retries: 1})
 	if params["PLUGIN_DEPTH"] != "50" {
 		t.Errorf("Expect clone depth 50")
 	}
@@ -149,5 +149,8 @@ func TestCloneParams(t *testing.T) {
 	}
 	if params["PLUGIN_SKIP_VERIFY"] != "true" {
 		t.Errorf("Expect PLUGIN_SKIP_VERIFY is true")
+	}
+	if params["PLUGIN_RETRIES"] != "1" {
+		t.Errorf("Expect PLUGIN_RETRIES is 1")
 	}
 }

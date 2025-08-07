@@ -38,6 +38,10 @@ func cloneParams(src manifest.Clone) map[string]string {
 		dst["GIT_SSL_NO_VERIFY"] = "true"
 		dst["PLUGIN_SKIP_VERIFY"] = "true"
 	}
+
+	if src.Retries > 0 {
+		dst["PLUGIN_RETRIES"] = strconv.Itoa(src.Retries)
+	}
 	return dst
 }
 
